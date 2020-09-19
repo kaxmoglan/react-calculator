@@ -42,7 +42,7 @@ h1 {
 #calculator .operator {
   background: #11d7fa;
   font-weight: bold;
-  font-size: 2.3rem;
+  font-size: 2.1rem;
   cursor: pointer;
 }
 #calculator .operator:hover {

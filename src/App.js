@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 
 function App() {
+  // DATA
   const buttons = [
     {
-      value: "C",
+      value: "init",
       content: "C",
       id: "clear",
       className: "number",
@@ -35,7 +36,7 @@ function App() {
     },
     {
       value: "*",
-      content: "X",
+      content: <i className="fas fa-times"></i>,
       id: "multiply",
       className: "operator",
     },
@@ -59,7 +60,7 @@ function App() {
     },
     {
       value: "-",
-      content: "-",
+      content: <i className="fas fa-minus"></i>,
       id: "subtract",
       className: "operator",
     },
@@ -83,7 +84,7 @@ function App() {
     },
     {
       value: "+",
-      content: "+",
+      content: <i className="fas fa-plus"></i>,
       id: "add",
       className: "operator",
     },
@@ -101,21 +102,96 @@ function App() {
     },
     {
       value: "=",
-      content: "=",
+      content: <i className="fas fa-equals"></i>,
       id: "equals",
       className: "operator",
     },
   ];
+
+  // STATE
+  const [input, setInput] = useState("0");
+  const [prevInput, setPrevInput] = useState("");
+  const [formula, setFormula] = useState("");
+  const [equals, setEquals] = useState(false);
+
+  // OPERATOR FUNCTIONS
+  const operatorRegExp = /[*+/-]/;
+
+  // HANDLERS
+
+  useEffect(() => {
+    if (equals) {
+      const answer = eval(formula);
+      setFormula(formula.concat(` = ${answer}`));
+      setInput(answer);
+    }
+  }, [equals]);
+
+  const handleClear = () => {
+    setInput("0");
+    setPrevInput("");
+    setFormula("");
+    setEquals(false);
+  };
+
+  const handleClick = (e) => {
+    const value = e.currentTarget.value;
+    // console.log(value);
+
+    if (!Number.isNaN(Number(value))) {
+      if (input.match(operatorRegExp)) {
+        setPrevInput(input);
+        setFormula(formula.concat(` ${input}`));
+        setInput(value);
+      } else if (input === "0" && value === "0") {
+        return;
+      } else if (input === "0") {
+        setInput(value);
+      } else {
+        setInput(input.concat(value));
+      }
+    } else if (value.match(operatorRegExp)) {
+      if (formula === "" && value === "-") {
+        setInput(value);
+        return;
+      }
+      setPrevInput(input);
+      setFormula(formula.concat(` ${input}`));
+      setInput(value);
+    } else {
+      switch (value) {
+        case "init":
+          handleClear();
+          break;
+        case ".":
+          if (!input.includes(".")) {
+            setInput(input.concat(value));
+          }
+          break;
+        case "=":
+          if (!equals) {
+            setFormula(formula.concat(` ${input}`));
+            setEquals(true);
+          }
+          break;
+        default:
+          return;
+      }
+    }
+    return;
+  };
+
   return (
     <>
       <h1>Calcleator</h1>
       <div id="calculator">
         <div id="display">
-          <p id="equation">1 / 2 + 3 - 4</p>
-          <p id="current">9</p>
+          <p id="equation">{formula}</p>
+          <p id="current">{input}</p>
         </div>
         {buttons.map((btn, idx) => (
           <button
+            onClick={handleClick}
             id={btn.id}
             className={btn.className}
             key={idx}
