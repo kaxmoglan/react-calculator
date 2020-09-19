@@ -1,0 +1,72 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+html {
+  background: white;
+  font-size: 10px;
+  font-family: "Roboto", sans-serif;
+}
+
+h1 {
+  margin-top: 5rem;
+  font-size: 5rem;
+}
+
+#calculator {
+  margin: 0 auto;
+  margin-top: 3rem;
+  width: 325px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-auto-rows: minmax(7.5rem, 1fr);
+  grid-gap: 0.3rem;
+  font-size: 2rem;
+  border: 1px solid #1f1f1f;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  background: #1f1f1f;
+}
+#calculator button {
+  border: 0.1px solid #1f1f1f;
+  border-radius: 2px;
+  font-size: 2.5rem;
+}
+#calculator .operator {
+  background: #11d7fa;
+  font-weight: bold;
+  font-size: 2.3rem;
+}
+#calculator .number {
+  background: #d6d5da;
+  font-weight: bold;
+}
+#calculator #display {
+  grid-column: span 4;
+  background: #1f1f1f;
+  color: #d6d5da;
+  padding-right: 1rem;
+}
+#calculator #display p {
+  text-align: right;
+}
+#calculator #display #equation {
+  font-size: 1.5rem;
+  color: #d6d5da;
+}
+#calculator #display #current {
+  font-size: 4rem;
+  margin-top: 0.5rem;
+  color: white;
+}
+#calculator #clear {
+  grid-column: span 3;
+  background: #c9c9cd;
+}
+#calculator #zero {
+  grid-column: span 2;
+}

@@ -1,0 +1,89 @@
+// VARIABLES
+
+$FONT: "Roboto", sans-serif;
+$OPERATOR: #11d7fa;
+$BLACK: #1f1f1f;
+$MIDGREY: #c9c9cd;
+$LIGHTGREY: #d6d5da;
+
+// RESETS
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+html {
+  background: white;
+  font-size: 10px;
+  font-family: $FONT;
+}
+
+h1 {
+  margin-top: 5rem;
+  font-size: 5rem;
+}
+
+#calculator {
+  margin: 0 auto;
+  margin-top: 3rem;
+  width: 325px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-auto-rows: minmax(7.5rem, 1fr);
+  grid-gap: 0.3rem;
+  font-size: 2rem;
+  border: 1px solid $BLACK;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  background: $BLACK;
+
+  button {
+    border: 0.1px solid $BLACK;
+    border-radius: 2px;
+    font-size: 2.5rem;
+  }
+
+  .operator {
+    background: $OPERATOR;
+    font-weight: bold;
+    font-size: 2.3rem;
+  }
+
+  .number {
+    background: $LIGHTGREY;
+    font-weight: bold;
+  }
+
+  #display {
+    grid-column: span 4;
+    background: $BLACK;
+    color: $LIGHTGREY;
+    padding-right: 1rem;
+
+    p {
+      text-align: right;
+    }
+
+    #equation {
+      font-size: 1.5rem;
+      color: $LIGHTGREY;
+    }
+
+    #current {
+      font-size: 4rem;
+      margin-top: 0.5rem;
+      color: white;
+    }
+  }
+
+  #clear {
+    grid-column: span 3;
+    background: $MIDGREY;
+  }
+
+  #zero {
+    grid-column: span 2;
+  }
+}
