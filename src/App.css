@@ -4,6 +4,9 @@
   margin: 0;
   padding: 0;
   text-align: center;
+  -webkit-transition: all 100ms ease;
+  -o-transition: all 100ms ease;
+  transition: all 100ms ease;
 }
 
 html {
@@ -40,10 +43,18 @@ h1 {
   background: #11d7fa;
   font-weight: bold;
   font-size: 2.3rem;
+  cursor: pointer;
+}
+#calculator .operator:hover {
+  background: #04b4d4;
 }
 #calculator .number {
   background: #d6d5da;
   font-weight: bold;
+  cursor: pointer;
+}
+#calculator .number:hover {
+  background: #bcbac2;
 }
 #calculator #display {
   grid-column: span 4;
@@ -65,7 +76,11 @@ h1 {
 }
 #calculator #clear {
   grid-column: span 3;
-  background: #c9c9cd;
+  background: #c1c1c2;
+  cursor: pointer;
+}
+#calculator #clear:hover {
+  background: #a7a7a9;
 }
 #calculator #zero {
   grid-column: span 2;

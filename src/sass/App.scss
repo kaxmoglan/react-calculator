@@ -3,7 +3,7 @@
 $FONT: "Roboto", sans-serif;
 $OPERATOR: #11d7fa;
 $BLACK: #1f1f1f;
-$MIDGREY: #c9c9cd;
+$MIDGREY: #c1c1c2;
 $LIGHTGREY: #d6d5da;
 
 // RESETS
@@ -12,6 +12,7 @@ $LIGHTGREY: #d6d5da;
   margin: 0;
   padding: 0;
   text-align: center;
+  transition: all 100ms ease;
 }
 
 html {
@@ -49,11 +50,21 @@ h1 {
     background: $OPERATOR;
     font-weight: bold;
     font-size: 2.3rem;
+    cursor: pointer;
+
+    &:hover {
+      background: darken($OPERATOR, 10%);
+    }
   }
 
   .number {
     background: $LIGHTGREY;
     font-weight: bold;
+    cursor: pointer;
+
+    &:hover {
+      background: darken($LIGHTGREY, 10%);
+    }
   }
 
   #display {
@@ -81,6 +92,11 @@ h1 {
   #clear {
     grid-column: span 3;
     background: $MIDGREY;
+    cursor: pointer;
+
+    &:hover {
+      background: darken($MIDGREY, 10%);
+    }
   }
 
   #zero {
