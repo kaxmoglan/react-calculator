@@ -145,7 +145,13 @@ function App() {
 
   const handleClick = (e) => {
     const value = e.currentTarget.value;
-
+    if (input.length > 11) {
+      setInput("MAX LIMIT");
+      return;
+    }
+    if (input.includes("LIMIT") && value !== "init") {
+      return;
+    }
     if (!Number.isNaN(Number(value))) {
       if (equals) {
         handleClear();

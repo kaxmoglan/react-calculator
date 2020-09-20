@@ -71,6 +71,7 @@ h1 {
   text-align: right;
 }
 #calculator #display #equation {
+  min-height: 1.8rem;
   font-size: 1.5rem;
   color: #d6d5da;
 }
