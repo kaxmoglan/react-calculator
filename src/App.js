@@ -110,7 +110,6 @@ function App() {
 
   // STATE
   const [input, setInput] = useState("0");
-  const [prevInput, setPrevInput] = useState("");
   const [formula, setFormula] = useState("");
   const [equals, setEquals] = useState(false);
   const [result, setResult] = useState();
@@ -126,27 +125,23 @@ function App() {
       setResult(answer);
       setFormula(formula.concat(` = ${answer}`));
       setInput(answer.toString());
-      // setEquals(false);
     }
   }, [equals]);
 
   const handleClear = () => {
     setInput("0");
-    setPrevInput("");
     setFormula("");
     setEquals(false);
   };
 
   const handleClick = (e) => {
     const value = e.currentTarget.value;
-    // console.log(value);
 
     if (!Number.isNaN(Number(value))) {
       if (equals) {
         handleClear();
         setInput(value);
       } else if (input.match(operatorRegExp)) {
-        setPrevInput(input);
         setFormula(formula.concat(` ${input}`));
         setInput(value);
       } else if (input === "0" && value === "0") {
@@ -161,21 +156,21 @@ function App() {
         setFormula(result.toString());
         setInput(value);
         setEquals(false);
-      } else if (value === "-") {
-        setFormula(input);
-
-        if (formula === "0") {
-          setFormula(value);
+      } else {
+        if (input === "0") {
+          if (value === "-") {
+            setInput(value);
+          } else return;
           return;
-        } else {
-          setPrevInput(input);
+        }
+        if (input.match(/[*+/]/) && input.length === 1 && value === "-") {
+          setInput(input.concat(value));
+        } else if (!input.match(operatorRegExp)) {
           setFormula(formula.concat(` ${input}`));
           setInput(value);
+        } else {
+          setInput(value);
         }
-      } else {
-        setPrevInput(input);
-        setFormula(formula.concat(` ${input}`));
-        setInput(value);
       }
     } else {
       switch (value) {
