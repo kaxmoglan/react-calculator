@@ -157,8 +157,13 @@ function App() {
         setInput(input.concat(value));
       }
     } else if (value.match(operatorRegExp)) {
-      if (value === "-") {
+      if (equals) {
+        setFormula(result.toString());
+        setInput(value);
+        setEquals(false);
+      } else if (value === "-") {
         setFormula(input);
+
         if (formula === "0") {
           setFormula(value);
           return;
@@ -167,10 +172,11 @@ function App() {
           setFormula(formula.concat(` ${input}`));
           setInput(value);
         }
+      } else {
+        setPrevInput(input);
+        setFormula(formula.concat(` ${input}`));
+        setInput(value);
       }
-      setPrevInput(input);
-      setFormula(formula.concat(` ${input}`));
-      setInput(value);
     } else {
       switch (value) {
         case "init":
