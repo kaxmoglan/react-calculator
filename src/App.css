@@ -24,15 +24,17 @@ h1 {
   margin: 0 auto;
   margin-top: 3rem;
   width: 325px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-auto-rows: minmax(7.5rem, 1fr);
-  grid-gap: 0.3rem;
   font-size: 2rem;
   border: 1px solid #1f1f1f;
   border-radius: 1rem;
   padding: 0.5rem;
   background: #1f1f1f;
+}
+#calculator .btn-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-auto-rows: minmax(7.5rem, 1fr);
+  grid-gap: 0.3rem;
 }
 #calculator button {
   border: 0.1px solid #1f1f1f;
@@ -57,10 +59,13 @@ h1 {
   background: #bcbac2;
 }
 #calculator #display {
-  grid-column: span 4;
+  width: 100%;
+  min-height: 7rem;
   background: #1f1f1f;
   color: #d6d5da;
   padding-right: 1rem;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
 }
 #calculator #display p {
   text-align: right;

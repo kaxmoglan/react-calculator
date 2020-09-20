@@ -116,17 +116,23 @@ function App() {
 
   // OPERATOR FUNCTIONS
   const operatorRegExp = /[*+/-]/;
+  const endsWithOperator = /[*+-/]$/;
 
   // HANDLERS
 
   useEffect(() => {
     if (equals) {
+      let cleanedFormula = formula;
+      while (endsWithOperator.test(cleanedFormula)) {
+        cleanedFormula = cleanedFormula.slice(0, -1);
+      }
+
       function solve(sum) {
         return new Function("return " + sum)();
       }
-      const answer = solve(formula);
+      const answer = solve(cleanedFormula);
       setResult(answer);
-      setFormula(formula.concat(` = ${answer}`));
+      setFormula(`${cleanedFormula} = ${answer}`);
       setInput(answer.toString());
     }
   }, [equals]);
@@ -206,17 +212,19 @@ function App() {
           <p id="equation">{formula}</p>
           <p id="current">{input}</p>
         </div>
-        {buttons.map((btn, idx) => (
-          <button
-            onClick={handleClick}
-            id={btn.id}
-            className={btn.className}
-            key={idx}
-            value={btn.value}
-          >
-            {btn.content}
-          </button>
-        ))}
+        <div className="btn-section">
+          {buttons.map((btn, idx) => (
+            <button
+              onClick={handleClick}
+              id={btn.id}
+              className={btn.className}
+              key={idx}
+              value={btn.value}
+            >
+              {btn.content}
+            </button>
+          ))}
+        </div>
       </div>
     </>
   );
