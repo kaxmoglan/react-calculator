@@ -113,6 +113,7 @@ function App() {
   const [prevInput, setPrevInput] = useState("");
   const [formula, setFormula] = useState("");
   const [equals, setEquals] = useState(false);
+  const [result, setResult] = useState();
 
   // OPERATOR FUNCTIONS
   const operatorRegExp = /[*+/-]/;
@@ -122,8 +123,10 @@ function App() {
   useEffect(() => {
     if (equals) {
       const answer = eval(formula);
+      setResult(answer);
       setFormula(formula.concat(` = ${answer}`));
-      setInput(answer);
+      setInput(answer.toString());
+      // setEquals(false);
     }
   }, [equals]);
 
@@ -139,7 +142,10 @@ function App() {
     // console.log(value);
 
     if (!Number.isNaN(Number(value))) {
-      if (input.match(operatorRegExp)) {
+      if (equals) {
+        handleClear();
+        setInput(value);
+      } else if (input.match(operatorRegExp)) {
         setPrevInput(input);
         setFormula(formula.concat(` ${input}`));
         setInput(value);
@@ -151,9 +157,16 @@ function App() {
         setInput(input.concat(value));
       }
     } else if (value.match(operatorRegExp)) {
-      if (formula === "" && value === "-") {
-        setInput(value);
-        return;
+      if (value === "-") {
+        setFormula(input);
+        if (formula === "0") {
+          setFormula(value);
+          return;
+        } else {
+          setPrevInput(input);
+          setFormula(formula.concat(` ${input}`));
+          setInput(value);
+        }
       }
       setPrevInput(input);
       setFormula(formula.concat(` ${input}`));
