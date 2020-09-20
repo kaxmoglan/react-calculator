@@ -130,7 +130,8 @@ function App() {
       function solve(sum) {
         return new Function("return " + sum)();
       }
-      const answer = solve(cleanedFormula);
+      const answer =
+        Math.round(1000000000000 * solve(cleanedFormula)) / 1000000000000;
       setResult(answer);
       setFormula(`${cleanedFormula} = ${answer}`);
       setInput(answer.toString());
