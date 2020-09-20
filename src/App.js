@@ -121,7 +121,10 @@ function App() {
 
   useEffect(() => {
     if (equals) {
-      const answer = eval(formula);
+      function solve(sum) {
+        return new Function("return " + sum)();
+      }
+      const answer = solve(formula);
       setResult(answer);
       setFormula(formula.concat(` = ${answer}`));
       setInput(answer.toString());
