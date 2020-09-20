@@ -81,7 +81,7 @@ h1 {
   color: white;
 }
 #calculator #clear {
-  grid-column: span 3;
+  grid-column: span 2;
   background: #c1c1c2;
   cursor: pointer;
 }

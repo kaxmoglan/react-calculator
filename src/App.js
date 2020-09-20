@@ -11,6 +11,12 @@ function App() {
       className: "number",
     },
     {
+      value: "%",
+      content: <i className="fas fa-percent"></i>,
+      id: "percent",
+      className: "operator",
+    },
+    {
       value: "/",
       content: <i className="fas fa-divide"></i>,
       id: "divide",
@@ -117,6 +123,7 @@ function App() {
   // OPERATOR FUNCTIONS
   const operatorRegExp = /[*+/-]/;
   const endsWithOperator = /[*+-/]$/;
+  const endsWithZero = /0$/;
 
   // HANDLERS
 
@@ -131,7 +138,7 @@ function App() {
         return new Function("return " + sum)();
       }
       const answer =
-        Math.round(1000000000000 * solve(cleanedFormula)) / 1000000000000;
+        Math.round(1000000000 * solve(cleanedFormula)) / 1000000000;
       setResult(answer);
       setFormula(`${cleanedFormula} = ${answer}`);
       setInput(answer.toString());
@@ -203,6 +210,11 @@ function App() {
             setFormula(formula.concat(` ${input}`));
             setEquals(true);
           }
+          break;
+        case "%":
+          const x = parseFloat(input);
+          const y = (Math.round(1000000 * (x / 100)) / 1000000).toString();
+          setInput(y);
           break;
         default:
           return;
