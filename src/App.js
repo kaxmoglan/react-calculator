@@ -119,14 +119,15 @@ function App() {
   const [formula, setFormula] = useState("");
   const [equals, setEquals] = useState(false);
   const [result, setResult] = useState();
+  const [value, setValue] = useState("0");
 
   // OPERATOR FUNCTIONS
   const operatorRegExp = /[*+/-]/;
   const endsWithOperator = /[*+-/]$/;
-  const endsWithZero = /0$/;
 
-  // HANDLERS
+  // USE EFFECTS
 
+  // evaluate equals on equals state change
   useEffect(() => {
     if (equals) {
       let cleanedFormula = formula;
@@ -145,6 +146,32 @@ function App() {
     }
   }, [equals]);
 
+  // run whenever value state changes
+  useEffect(() => {
+    handleButtons(value);
+  }, [value]);
+
+  // KEYBOARD FUNCTIONALITY
+  useEffect(() => {
+    document.addEventListener("keydown", (e) => {
+      switch (e.key) {
+        case "Enter":
+          setValue("=");
+          break;
+        case "c":
+          setValue("init");
+          break;
+        case " ":
+          setValue("0");
+          break;
+        default:
+          setValue(e.key);
+          break;
+      }
+    });
+  });
+
+  // HANDLERS
   const handleClear = () => {
     setInput("0");
     setFormula("");
@@ -152,7 +179,11 @@ function App() {
   };
 
   const handleClick = (e) => {
-    const value = e.currentTarget.value;
+    setValue(e.currentTarget.value);
+  };
+
+  const handleButtons = (value) => {
+    // const value = e.currentTarget.value;
     if (input.length > 11) {
       setInput("MAX LIMIT");
       return;
