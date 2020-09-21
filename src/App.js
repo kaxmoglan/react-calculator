@@ -150,6 +150,12 @@ function App() {
     handleButtons(value);
   }, [value]);
 
+  useEffect(() => {
+    if (input.length > 11) {
+      setInput("MAX LIMIT");
+    }
+  }, [input]);
+
   // KEYBOARD FUNCTIONALITY
   useEffect(() => {
     document.onkeydown = (e) => {
