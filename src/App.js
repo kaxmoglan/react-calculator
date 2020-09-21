@@ -121,12 +121,11 @@ function App() {
   const [result, setResult] = useState();
   const [value, setValue] = useState("0");
 
-  // OPERATOR FUNCTIONS
+  // OPERATOR REGEXPs
   const operatorRegExp = /[*+/-]/;
   const endsWithOperator = /[*+-/]$/;
 
   // USE EFFECTS
-
   // evaluate equals on equals state change
   useEffect(() => {
     if (equals) {
@@ -153,8 +152,9 @@ function App() {
 
   // KEYBOARD FUNCTIONALITY
   useEffect(() => {
-    document.addEventListener("keydown", (e) => {
-      switch (e.key) {
+    document.onkeydown = (e) => {
+      const keyPress = e.key;
+      switch (keyPress) {
         case "Enter":
           setValue("=");
           break;
@@ -164,11 +164,14 @@ function App() {
         case " ":
           setValue("0");
           break;
+        case "x":
+          setValue("*");
+          break;
         default:
           setValue(e.key);
           break;
       }
-    });
+    };
   });
 
   // HANDLERS
@@ -179,11 +182,11 @@ function App() {
   };
 
   const handleClick = (e) => {
+    console.log(e.currentTarget.value);
     setValue(e.currentTarget.value);
   };
 
   const handleButtons = (value) => {
-    // const value = e.currentTarget.value;
     if (input.length > 11) {
       setInput("MAX LIMIT");
       return;
@@ -192,32 +195,40 @@ function App() {
       return;
     }
     if (!Number.isNaN(Number(value))) {
+      // IF NUMBER
       if (equals) {
         handleClear();
         setInput(value);
+        setValue("");
       } else if (input.match(operatorRegExp)) {
         setFormula(formula.concat(` ${input}`));
         setInput(value);
+        setValue("");
       } else if (input === "0" && value === "0") {
         return;
       } else if (input === "0") {
         setInput(value);
+        setValue("");
       } else {
         setInput(input.concat(value));
+        setValue("");
       }
     } else if (value.match(operatorRegExp)) {
+      // ELSE IF OPERATOR
       if (equals) {
         setFormula(result.toString());
         setInput(value);
         setEquals(false);
       } else {
-        if (input === "0") {
+        if (input === "0" && value === "-") {
           if (value === "-") {
             setInput(value);
           } else return;
-          return;
-        }
-        if (input.match(/[*+/]/) && input.length === 1 && value === "-") {
+        } else if (
+          input.match(/[*+/]/) &&
+          input.length === 1 &&
+          value === "-"
+        ) {
           setInput(input.concat(value));
         } else if (!input.match(operatorRegExp)) {
           setFormula(formula.concat(` ${input}`));
@@ -250,6 +261,7 @@ function App() {
         default:
           return;
       }
+      return;
     }
     return;
   };

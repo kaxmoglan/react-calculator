@@ -29,6 +29,8 @@ h1 {
   border-radius: 1rem;
   padding: 0.5rem;
   background: #1f1f1f;
+  -webkit-box-shadow: 0px 0px 30px #a09e9e;
+          box-shadow: 0px 0px 30px #a09e9e;
 }
 #calculator .btn-section {
   display: grid;
@@ -69,15 +71,15 @@ h1 {
   min-height: 7rem;
   background: #1f1f1f;
   color: #d6d5da;
-  padding-right: 1rem;
-  padding-bottom: 1rem;
-  padding-top: 1rem;
+  padding: 1rem;
 }
 #calculator #display p {
   text-align: right;
+  background: #525252;
+  padding: 0.5rem;
 }
 #calculator #display #equation {
-  min-height: 1.8rem;
+  min-height: 3rem;
   font-size: 1.5rem;
   color: #d6d5da;
 }
