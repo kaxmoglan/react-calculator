@@ -203,7 +203,6 @@ function App() {
       } else if (input.match(operatorRegExp)) {
         setFormula(formula.concat(` ${input}`));
         setInput(value);
-        setValue("");
       } else if (input === "0" && value === "0") {
         return;
       } else if (input === "0") {
