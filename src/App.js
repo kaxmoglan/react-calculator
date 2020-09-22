@@ -188,7 +188,6 @@ function App() {
   };
 
   const handleClick = (e) => {
-    console.log(e.currentTarget.value);
     setValue(e.currentTarget.value);
   };
 
@@ -209,6 +208,7 @@ function App() {
       } else if (input.match(operatorRegExp)) {
         setFormula(formula.concat(` ${input}`));
         setInput(value);
+        setValue("");
       } else if (input === "0" && value === "0") {
         return;
       } else if (input === "0") {
