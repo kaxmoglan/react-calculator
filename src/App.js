@@ -126,7 +126,7 @@ function App() {
   const endsWithOperator = /[*+-/]$/;
 
   // USE EFFECTS
-  // evaluate equals on equals state change
+  // evaluate formula when equals state changes
   useEffect(() => {
     if (equals) {
       let cleanedFormula = formula;
@@ -150,6 +150,7 @@ function App() {
     handleButtons(value);
   }, [value]);
 
+  // run whenever input state changes
   useEffect(() => {
     if (input.length > 11) {
       setInput("MAX LIMIT");
