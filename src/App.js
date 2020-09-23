@@ -135,7 +135,7 @@ function App() {
       }
 
       function solve(sum) {
-        return new Function("return " + sum)();
+        return eval(sum);
       }
       const answer =
         Math.round(1000000000 * solve(cleanedFormula)) / 1000000000;
@@ -251,7 +251,10 @@ function App() {
           handleClear();
           break;
         case ".":
-          if (!input.includes(".")) {
+          if (input.match(operatorRegExp)) {
+            setFormula(formula.concat(` ${input}`));
+            setInput("0.");
+          } else if (!input.includes(".")) {
             setInput(input.concat(value));
           }
           break;
